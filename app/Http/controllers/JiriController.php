@@ -113,7 +113,7 @@ class JiriController
 
         $this->jiri->update($id, $data);
 
-        Response::redirect('/jiri?id='.$id);
+        Response::redirect('/jiri?id=' . $id);
     }
 
     public function destroy(): void

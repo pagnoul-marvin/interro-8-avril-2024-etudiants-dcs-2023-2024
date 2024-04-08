@@ -47,6 +47,20 @@
                        class="underline text-blue-500">Créer un nouveau jiri</a>
                 </div>
             </main>
+            <div>
+                <a href="/users/register" class="underline text-blue-500">S'enregister</a>
+            </div>
+            <div>
+                <a href="/users/login" class="underline text-blue-500">Se connecter</a>
+            </div>
+            <div>
+                <h2 class="font-bold">Votre profil</h2>
+                <?php
+                component('users.profile', [
+                        'title' => 'Votre profil',
+                ]);
+                ?>
+            </div>
             <?php
             component('navigations.main'); ?>
         </div>

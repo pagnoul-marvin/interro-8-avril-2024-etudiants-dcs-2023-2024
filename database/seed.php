@@ -1,7 +1,7 @@
 <?php
 
 // Seed tables
-echo 'Seeding Jiri table'.PHP_EOL;
+echo 'Seeding Jiri table' . PHP_EOL;
 $jiris = [
     ['name' => 'Projets Web 2024', 'starting_at' => '2024-01-19 08:30:00'],
     ['name' => 'Design Web 2024', 'starting_at' => '2024-06-19 08:30:00'],
@@ -20,4 +20,23 @@ foreach ($jiris as $jiri) {
     $insert_jiri_in_jiris_table_stmt->execute();
 }
 $count_jiris = count($jiris);
-echo "Jiri table seeded with {$count_jiris} jiris".PHP_EOL;
+echo "Jiri table seeded with {$count_jiris} jiris" . PHP_EOL;
+
+
+echo 'Seeding Users table' . PHP_EOL;
+$users = [
+    ['firstname' => 'Jacques', 'lastname' => 'Dubois', 'email' => 'jacquesdubois@gmail.com', 'password' => ''],
+    ['firstname' => 'Jean', 'lastname' => 'Duchamp', 'email' => 'jeanduchamp@gmail.com', 'password' => ''],
+];
+
+$insert_user_in_users_table_sql = 'INSERT INTO users (firstname,lastname, email, password) VALUES (:firstname, :lastname, :email, :password)';
+$insert_user_in_users_table_stmt = $db->preapre($insert_user_in_users_table_sql);
+foreach ($users as $user) {
+    $insert_user_in_users_table_stmt->bindValue('firstname', $user['firstname']);
+    $insert_user_in_users_table_stmt->bindValue('lastname', $user['lastname']);
+    $insert_user_in_users_table_stmt->bindValue('email', $user['email']);
+    $insert_user_in_users_table_stmt->bindValue('password', $user['password']);
+    $insert_user_in_users_table_stmt->execute();
+}
+$count_users = count($users);
+echo "Users table seeded with {$count_users} users" . PHP_EOL;

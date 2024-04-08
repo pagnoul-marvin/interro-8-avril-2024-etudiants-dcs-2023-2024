@@ -5,19 +5,19 @@
 use Core\Exceptions\FileNotFoundException;
 
 try {
-    $db = new Core\Database(BASE_PATH.'/.env.local.ini');
+    $db = new Core\Database(BASE_PATH . '/..env.local.ini');
 } catch (FileNotFoundException $exception) {
     die($exception->getMessage());
 }
 
 // Drop tables
-echo 'Dropping all Tables'.PHP_EOL;
+echo 'Dropping all Tables' . PHP_EOL;
 $db->dropTables();
-echo 'All tables have been dropped'.PHP_EOL;
+echo 'All tables have been dropped' . PHP_EOL;
 
 // Create tables
 
-echo 'Creating Jiri table'.PHP_EOL;
+echo 'Creating Jiri table' . PHP_EOL;
 $create_jiri_table_sql = <<<SQL
     create table jiris
     (
@@ -30,5 +30,22 @@ $create_jiri_table_sql = <<<SQL
     );
 SQL;
 
+echo 'Creating Users table' . PHP_EOL;
+$create_users_table_sql = <<<SQL
+create table users (
+  id    int auto_increment
+    primary key,
+  firstname varchar(255) not null,
+  lastname varchar(255) not null,
+  email varchar(255) not null,
+  password varchar(255) not null,
+  created_at  timestamp default CURRENT_TIMESTAMP null,
+  updated_at  timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP
+);
+SQL;
+
+
 $db->exec($create_jiri_table_sql);
-echo 'Jiri table created'.PHP_EOL;
+$db->exec($create_users_table_sql);
+echo 'Jiri table created' . PHP_EOL;
+echo 'Users table created' . PHP_EOL;
